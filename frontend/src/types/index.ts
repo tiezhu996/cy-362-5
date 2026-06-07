@@ -22,6 +22,17 @@ export interface OperationRecord {
   priority: string;
 }
 
+export interface Notice {
+  id: number;
+  title: string;
+  content: string;
+  level: "URGENT" | "NORMAL";
+  isActive: boolean;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface OverviewResponse {
   appName: string;
   appCode: string;
@@ -29,4 +40,5 @@ export interface OverviewResponse {
   features: FeatureItem[];
   kpis: KpiItem[];
   records: OperationRecord[];
+  notices: Notice[];
 }

@@ -12,3 +12,13 @@ spring:
     hibernate:
       ddl-auto: none
     open-in-view: false
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:database/init.sql
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.generated.ldmurdergame.model
+  configuration:
+    map-underscore-to-camel-case: true

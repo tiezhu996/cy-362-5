@@ -1,4 +1,4 @@
-import type { FeatureItem, KpiItem, OperationRecord } from "../types";
+import type { FeatureItem, KpiItem, OperationRecord, Notice } from "../types";
 
 export const localFeatures: FeatureItem[] = [
   {
@@ -105,5 +105,38 @@ export const operationRecords: OperationRecord[] = [
     "status": "可导出",
     "metric": "28 条",
     "priority": "中"
+  }
+];
+
+export const localNotices: Notice[] = [
+  {
+    id: 1,
+    title: "【紧急】6月10日系统升级维护通知",
+    content: "为提升系统稳定性，将于2026年6月10日凌晨2:00-4:00进行系统升级维护，期间暂停所有服务，请提前做好安排。",
+    level: "URGENT",
+    isActive: true,
+    sortOrder: 1,
+    createdAt: "2026-06-07T10:00:00",
+    updatedAt: "2026-06-07T10:00:00"
+  },
+  {
+    id: 2,
+    title: "端午节假日营业安排",
+    content: "6月10日-6月12日端午节期间，门店正常营业，营业时间调整为10:00-24:00，请各DM注意排班。",
+    level: "NORMAL",
+    isActive: true,
+    sortOrder: 2,
+    createdAt: "2026-06-06T09:00:00",
+    updatedAt: "2026-06-06T09:00:00"
+  },
+  {
+    id: 3,
+    title: "新剧本《迷雾山庄》上线",
+    content: "新剧本《迷雾山庄》已录入系统，欢迎各位DM预约体验，首周预约享8折优惠。",
+    level: "NORMAL",
+    isActive: true,
+    sortOrder: 3,
+    createdAt: "2026-06-05T14:00:00",
+    updatedAt: "2026-06-05T14:00:00"
   }
 ];

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.generated.ldmurdergame.mapper.NoticeMapper">
+  <resultMap id="NoticeResultMap" type="com.generated.ldmurdergame.model.Notice">
+    <id column="id" property="id"/>
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="level" property="level"/>
+    <result column="is_active" property="isActive"/>
+    <result column="sort_order" property="sortOrder"/>
+    <result column="created_at" property="createdAt"/>
+    <result column="updated_at" property="updatedAt"/>
+  </resultMap>
+
+  <select id="findAllActive" resultMap="NoticeResultMap">
+    SELECT id, title, content, level, is_active, sort_order, created_at, updated_at
+    FROM notices
+    WHERE is_active = TRUE
+    ORDER BY CASE WHEN level = 'URGENT' THEN 0 ELSE 1 END, sort_order ASC, created_at DESC
+  </select>
+
+  <select id="findAll" resultMap="NoticeResultMap">
+    SELECT id, title, content, level, is_active, sort_order, created_at, updated_at
+    FROM notices
+    ORDER BY CASE WHEN level = 'URGENT' THEN 0 ELSE 1 END, sort_order ASC, created_at DESC
+  </select>
+
+  <select id="findById" resultMap="NoticeResultMap">
+    SELECT id, title, content, level, is_active, sort_order, created_at, updated_at
+    FROM notices
+    WHERE id = #{id}
+  </select>
+
+  <insert id="insert" parameterType="com.generated.ldmurdergame.model.Notice" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO notices (title, content, level, is_active, sort_order, created_at, updated_at)
+    VALUES (
+      #{title},
+      #{content},
+      COALESCE(#{level}, 'NORMAL'),
+      COALESCE(#{isActive}, TRUE),
+      COALESCE(#{sortOrder}, 0),
+      CURRENT_TIMESTAMP,
+      CURRENT_TIMESTAMP
+    )
+  </insert>
+
+  <update id="update" parameterType="com.generated.ldmurdergame.model.Notice">
+    UPDATE notices
+    SET title = #{title},
+        content = #{content},
+        level = COALESCE(#{level}, level),
+        is_active = COALESCE(#{isActive}, is_active),
+        sort_order = COALESCE(#{sortOrder}, sort_order),
+        updated_at = CURRENT_TIMESTAMP
+    WHERE id = #{id}
+  </update>
+
+  <delete id="deleteById">
+    DELETE FROM notices WHERE id = #{id}
+  </delete>
+</mapper>

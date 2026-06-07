@@ -4,12 +4,20 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.generated.ldmurdergame.model.FeatureItem;
 import com.generated.ldmurdergame.model.KpiItem;
+import com.generated.ldmurdergame.model.Notice;
 import com.generated.ldmurdergame.model.OperationRecord;
 import com.generated.ldmurdergame.model.OverviewResponse;
 
 @Service
 public class OverviewService {
+  private final NoticeService noticeService;
+
+  public OverviewService(NoticeService noticeService) {
+    this.noticeService = noticeService;
+  }
+
   public OverviewResponse getOverview() {
+    List<Notice> notices = noticeService.getActiveNotices();
     return new OverviewResponse(
       "剧本杀门店运营管理系统",
       "ldmurdergame",
@@ -27,7 +35,8 @@ public class OverviewService {
         new OperationRecord("ldmurdergame-2", "场次排期与拼车位", "管理员", "排期中", "31 单", "中"),
         new OperationRecord("ldmurdergame-3", "玩家组局与角色分配", "服务台", "巡检中", "10 项", "低"),
         new OperationRecord("ldmurdergame-4", "会员积分与等级体系", "财务组", "优化中", "4 级", "高"),
-        new OperationRecord("ldmurdergame-5", "营收与上座率分析", "审核组", "可导出", "28 条", "中"))
+        new OperationRecord("ldmurdergame-5", "营收与上座率分析", "审核组", "可导出", "28 条", "中")),
+      notices
     );
   }
 }

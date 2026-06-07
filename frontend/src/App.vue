@@ -8,6 +8,7 @@ import type { OverviewResponse } from "./types";
 import FeatureStrip from "./components/FeatureStrip.vue";
 import MetricGrid from "./components/MetricGrid.vue";
 import OperationsTable from "./components/OperationsTable.vue";
+import NoticeBar from "./components/NoticeBar.vue";
 
 const overview = ref<OverviewResponse>(createFallbackOverview());
 const notice = ref(REQUEST_MESSAGES.overviewFallback);
@@ -35,6 +36,7 @@ onMounted(async () => {
       </div>
       <el-button type="primary" @click="goHealth">API Health</el-button>
     </header>
+    <NoticeBar :notices="overview.notices" />
     <section class="workspace">
       <div class="lead-grid">
         <article class="hero-panel">
